@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GradesService } from './grades.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-grades',
@@ -10,21 +11,27 @@ export class GradesComponent implements OnInit {
   grades: any;
   gradeShow: any;
 
-  constructor(private gradesService: GradesService) {}
+  constructor(private gradesService: GradesService, private router: Router) {}
 
   ngOnInit(): void {
-    this.gradesService.getGrades().subscribe((res) => {
-      this.grades = res.UCS_CONNOTA_RES.UCS_CONNOTA_COM;
-      this.grades = this.grades.map((grade: any) => {
-        return {
-          ...grade,
-          select: false,
-        };
-      });
-      this.grades[0].select = true;
-      this.gradeShow = this.grades[0].UCS_CONNOTA_CO;
-      console.log(this.grades);
-    });
+    this.gradesService.getGrades().subscribe(
+      (res) => {
+        this.grades = res.UCS_CONNOTA_RES.UCS_CONNOTA_COM;
+        this.grades = this.grades.map((grade: any) => {
+          return {
+            ...grade,
+            select: false,
+          };
+        });
+        this.grades[0].select = true;
+        this.gradeShow = this.grades[0].UCS_CONNOTA_CO;
+        console.log(this.grades);
+      },
+      (err) => {
+        console.log(err);
+        this.router.navigate(['/']);
+      }
+    );
   }
 
   getFinalGrade() {
@@ -71,5 +78,10 @@ export class GradesComponent implements OnInit {
       }
       return grade;
     });
+  }
+
+  back() {
+    sessionStorage.removeItem('token');
+    this.router.navigate(['/']);
   }
 }

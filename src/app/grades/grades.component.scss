@@ -6,6 +6,16 @@
   padding: 50px 80px;
 }
 
+.box-back {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
 .box-grades-courses {
   background-color: white;
   padding: 20px 40px;
