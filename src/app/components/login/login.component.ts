@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LoginService } from './login.service';
 import { switchMap } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment.prod';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  email: string = '100109263';
-  password: string = '736137592005';
+  email: string = environment?.user;
+  password: string = environment?.password;
 
   constructor(private loginService: LoginService, private router: Router) {}
 
