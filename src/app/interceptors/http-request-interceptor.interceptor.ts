@@ -8,7 +8,7 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { LoadingService } from './loading.service';
+import { LoadingService } from '../services/loading.service';
 
 /**
  * This class is for intercepting http requests. When a request starts, we set the loadingSub property
@@ -16,18 +16,9 @@ import { LoadingService } from './loading.service';
  * property to false. If an error occurs while servicing the request, set the loadingSub property to false.
  * @class {HttpRequestInterceptor}
  */
-
 @Injectable()
 export class HttpRequestInterceptor implements HttpInterceptor {
   constructor(private _loading: LoadingService) {}
-
-  // intercept(
-  //   request: HttpRequest<unknown>,
-  //   next: HttpHandler
-  // ): Observable<HttpEvent<unknown>> {
-  //   console.log('intercepted request ... ');
-  //   return next.handle(request);
-  // }
 
   intercept(
     request: HttpRequest<any>,
@@ -39,7 +30,7 @@ export class HttpRequestInterceptor implements HttpInterceptor {
         if (event instanceof HttpResponse) {
           this._loading.setLoading(false, request.url);
         }
-        console.log('event is:', event);
+
         return event;
       }),
       catchError((error) => {

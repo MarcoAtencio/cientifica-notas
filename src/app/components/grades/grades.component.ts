@@ -31,15 +31,14 @@ export class GradesComponent implements OnInit {
           };
         });
 
-        console.log('grades', this.grades);
         this.grades[0].select = true;
         this.gradeShow = this.grades[0].UCS_CONNOTA_CO;
         // console.log(this.grades);
-      },
-      (err) => {
-        console.log(err);
-        this.router.navigate(['/']);
-      }
+        },
+        (err) => {
+          console.log(err);
+          this.router.navigate(['/']);
+        }
     );
   }
 

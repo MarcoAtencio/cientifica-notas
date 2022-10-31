@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { delay } from 'rxjs';
-import { LoadingService } from './loading.service';
+import { LoadingService } from './services/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +9,6 @@ import { LoadingService } from './loading.service';
 })
 export class AppComponent implements OnInit {
   title = 'cientifica-notas';
-
   loading: boolean = false;
 
   constructor(private _loading: LoadingService) {}
