@@ -5,7 +5,11 @@
       <p style="margin-left: 10px">Regresar</p>
     </div>
 
-    <h1 class="text-center mb-4 mt-4">Notas</h1>
+    <div class="header">
+      <h1 class="text-center mb-4 mt-4">Notas</h1>
+      <!-- <p class="average">{{ finalAverage() }}</p> -->
+    </div>
+
     <div class="row">
       <div class="col-12 col-md-3" style="padding-right: 30px">
         <h3 class="mb-3 text-center">Cursos</h3>
@@ -43,7 +47,7 @@
         </ng-container>
         <div class="row">
           <p class="col-5">Nota Final</p>
-          <p class="col-4 text-center">{{ getFinalGrade() }}</p>
+          <p class="col-4 text-center">{{ getFinalGrade().toFixed(2) }}</p>
           <p class="col-3 text-center">100%</p>
         </div>
       </div>

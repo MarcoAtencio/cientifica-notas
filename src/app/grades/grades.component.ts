@@ -17,15 +17,24 @@ export class GradesComponent implements OnInit {
     this.gradesService.getGrades().subscribe(
       (res) => {
         this.grades = res.UCS_CONNOTA_RES.UCS_CONNOTA_COM;
+        //update the final grade of the course with the sum of the grades
         this.grades = this.grades.map((grade: any) => {
           return {
             ...grade,
-            select: false,
+            notaFinal: grade.UCS_CONNOTA_CO.filter((grade: any) => {
+              return grade.detalle_evaluacion !== 'NOTA FINAL';
+            })
+              .map((grade: any) => {
+                return (grade.peso / 100) * grade.nota;
+              })
+              .reduce((a: any, b: any) => a + b, 0),
           };
         });
+
+        console.log('grades', this.grades);
         this.grades[0].select = true;
         this.gradeShow = this.grades[0].UCS_CONNOTA_CO;
-        console.log(this.grades);
+        // console.log(this.grades);
       },
       (err) => {
         console.log(err);
@@ -83,5 +92,9 @@ export class GradesComponent implements OnInit {
   back() {
     sessionStorage.removeItem('token');
     this.router.navigate(['/']);
+  }
+
+  finalAverage() {
+    return 0;
   }
 }

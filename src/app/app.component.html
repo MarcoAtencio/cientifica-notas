@@ -1,4 +1,19 @@
-<div>
-  <router-outlet></router-outlet>
-  <p class="credits">By Marco Atencio for Alessia Pulgar</p>
+<!-- Loading spinner -->
+<div
+  *ngIf="loading"
+  class="loading-container d-flex justify-content-center align-items-center"
+>
+  <mat-progress-spinner color="primary" mode="indeterminate">
+  </mat-progress-spinner>
+</div>
+
+<!-- the application -->
+<div class="site-container">
+  <!-- <div class="site-header">
+    <app-header></app-header>
+  </div> -->
+  <div class="site-content">
+    <router-outlet></router-outlet>
+    <p class="credits">By Marco Atencio for Alessia Pulgar</p>
+  </div>
 </div>
