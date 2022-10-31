@@ -10,8 +10,8 @@ import { environment } from '../../../environments/environment.prod';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  email: string = environment?.user;
-  password: string = environment?.password;
+  email: string = '';
+  password: string = '';
 
   constructor(private loginService: LoginService, private router: Router) {}
 
