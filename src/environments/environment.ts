@@ -11,8 +11,8 @@ export const environment = {
     apiKey: 'AIzaSyBUT5S7RJFnOOANoZIq7nPVo-Kt9QbHv2I',
     authDomain: 'cientifica-notas.firebaseapp.com',
     messagingSenderId: '343427193652',
-    measurementId: 'G-8MJF7JT34R',
-  }
+    measurementId: 'G-EM9F9DV6XS',
+  },
 };
 
 /*

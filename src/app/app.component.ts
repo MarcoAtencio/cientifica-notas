@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
-import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { delay } from 'rxjs';
 import { LoadingService } from './services/loading.service';
-
-declare var gtag:any;
 
 @Component({
   selector: 'app-root',
@@ -15,27 +11,9 @@ export class AppComponent implements OnInit {
   title = 'cientifica-notas';
   loading: boolean = false;
 
-  constructor(
-    private _loading: LoadingService,
-    private gtmService: GoogleTagManagerService,
-    private router: Router
-  ) {
-    this.gtmService.addGtmToDom();
-  }
+  constructor(private _loading: LoadingService) {}
 
   ngOnInit() {
-    this.router.events.forEach((item) => {
-      if (item instanceof NavigationEnd) {
-        const gtmTag = {
-          event: 'page',
-          pageName: item.url,
-        };
-
-        gtag('config','G-0RPEMMH1EW',{
-          'page_path': item.url
-        });
-      }
-    });
     this.listenToLoading();
   }
 

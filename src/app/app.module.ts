@@ -12,9 +12,15 @@ import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { environment } from 'src/environments/environment';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
-
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
-import { GoogleTagManagerModule } from 'angular-google-tag-manager';
+import {
+  provideAnalytics,
+  getAnalytics,
+  ScreenTrackingService,
+  UserTrackingService,
+} from '@angular/fire/analytics';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, GradesComponent],
@@ -28,9 +34,8 @@ import { GoogleTagManagerModule } from 'angular-google-tag-manager';
     MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
-    GoogleTagManagerModule.forRoot({
-      id: 'GTM-5BRBHMH',
-    }),
+    provideAnalytics(() => getAnalytics()),
+    provideAuth(() => getAuth()),
   ],
   providers: [
     {
@@ -38,6 +43,8 @@ import { GoogleTagManagerModule } from 'angular-google-tag-manager';
       useClass: HttpRequestInterceptor,
       multi: true,
     },
+    ScreenTrackingService,
+    UserTrackingService,
   ],
   bootstrap: [AppComponent],
 })
