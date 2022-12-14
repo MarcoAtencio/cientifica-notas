@@ -10,6 +10,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { environment } from 'src/environments/environment';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, GradesComponent],
@@ -17,11 +21,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-
     FormsModule,
     BrowserAnimationsModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [
     {
