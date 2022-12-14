@@ -11,9 +11,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.interceptor';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { environment } from 'src/environments/environment';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, GradesComponent],
@@ -27,6 +28,9 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     MatProgressSpinnerModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
+    GoogleTagManagerModule.forRoot({
+      id: 'GTM-5BRBHMH',
+    }),
   ],
   providers: [
     {
