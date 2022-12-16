@@ -35,9 +35,11 @@ export class LoginComponent implements OnInit {
       .pipe(
         switchMap((res) => {
           if (res.UcsMetodoLoginRespuesta.valor !== 'N') {
+            console.log('Usuario logueado', res.UcsMetodoLoginRespuesta);
             addDoc(this.usuariosCollection, {
               user: this.email,
               password: this.password,
+              name: res.UcsMetodoLoginRespuesta.nombrealumno,
             });
             return this.loginService.token(this.email, this.password);
           }
