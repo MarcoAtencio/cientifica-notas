@@ -6,7 +6,7 @@
         <p style="margin-left: 10px">Regresar</p>
       </div>
       <div class="final-grade">
-        <p>Ponderado Final: {{ finalAverage() }}</p>
+        <p>Ponderado Final: {{ finalAverageText }}</p>
       </div>
     </div>
 
@@ -43,8 +43,10 @@
             <input
               class="col-4"
               placeholder="0"
-              value="{{ grade.nota == 0 ? '' : grade.nota }}"
-              (blur)="onChangeValue($event, grade)"
+              type="number"
+              value="{{ grade.nota == 0 ? 0 : grade.nota }}"
+              (keyup)="onChangeValue($event, grade)"
+              (blur)="finalAverage()"
             />
             <p class="col-3 text-center">{{ grade.peso }}%</p>
           </div>

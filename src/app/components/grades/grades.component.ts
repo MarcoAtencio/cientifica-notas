@@ -14,6 +14,8 @@ export class GradesComponent implements OnInit {
   idGradeShow: string = '';
   coursesLastCycle: any = [];
   totalCredits: number = 0;
+  average: string = '00';
+  finalAverageText: string = '00';
 
   constructor(private gradesService: GradesService, private router: Router) {}
 
@@ -56,19 +58,18 @@ export class GradesComponent implements OnInit {
 
           this.gradeShow = this.grades[0].UCS_CONNOTA_CO;
           this.idGradeShow = this.grades[0].codigoCurso;
-          console.log('init grade2', this.idGradeShow);
-          console.log('subscribe next', this.totalCredits);
+        },
+        complete: () => {
+          this.finalAverage();
         },
         error: (err) => {
-          console.log(err);
           this.router.navigate(['/']);
         },
       });
   }
 
   getFinalGrade() {
-    const grade = this.gradeShow;
-    const sum = grade
+    const sum = this.gradeShow
       .filter((grade: any) => {
         return grade.detalle_evaluacion !== 'NOTA FINAL';
       })
@@ -87,18 +88,10 @@ export class GradesComponent implements OnInit {
       return grade;
     });
 
-    console.log('grades2 ', this.grades);
-
     return sum;
   }
 
   selectCourse(course: any) {
-    this.grades = this.grades.map((grade: any) => {
-      return {
-        ...grade,
-        select: false,
-      };
-    });
     this.grades = this.grades.map((grade: any) => {
       if (grade.codigoCurso == course) {
         return {
@@ -106,29 +99,30 @@ export class GradesComponent implements OnInit {
           select: true,
         };
       }
-      return grade;
+      return {
+        ...grade,
+        select: false,
+      };
     });
+
     this.gradeShow = this.grades.find((grade: any, index: any) => {
-      return grade.codigoCurso === course;
+      if (grade.codigoCurso === course) {
+        this.idGradeShow = grade.codigoCurso;
+        return true;
+      }
+      return false;
     }).UCS_CONNOTA_CO;
-
-    this.idGradeShow = this.grades.find((grade: any, index: any) => {
-      return grade.codigoCurso === course;
-    }).codigoCurso;
-
-    console.log('init grade3', this.idGradeShow);
   }
 
   onChangeValue(event: Event, auxGrade: any): void {
     const value: string = (<HTMLInputElement>event.target).value;
-    console.log('grade', { auxGrade, value });
+
     this.gradeShow = this.gradeShow.map((grade: any) => {
       if (grade.detalle_evaluacion === auxGrade.detalle_evaluacion) {
         grade.nota = value;
       }
       return grade;
     });
-    console.log('grades', this.grades);
   }
 
   back() {
@@ -137,11 +131,16 @@ export class GradesComponent implements OnInit {
   }
 
   finalAverage() {
-    return (
-      this.grades.reduce((acumulator: any, currentValue: any) => {
-        // console.log('cu', currentValue);
-        return acumulator + currentValue.notaFinal.toFixed() * currentValue.creditos;
-      }, 0) / this.totalCredits
-    ).toFixed(2);
+    const sumGrades = this.grades
+      .reduce(
+        (acumulator: any, currentValue: any) =>
+          acumulator + currentValue.notaFinal.toFixed() * currentValue.creditos,
+        0
+      )
+      .toFixed(2);
+
+    const average = (sumGrades / this.totalCredits).toFixed(2);
+
+    this.finalAverageText = average;
   }
 }
