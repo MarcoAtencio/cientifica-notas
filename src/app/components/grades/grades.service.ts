@@ -29,4 +29,19 @@ export class GradesService {
       }
     );
   }
+
+  getCourseHistory() {
+    const endpoint = `${this.API}student/getCourseHistory`;
+    const token = sessionStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.post<any>(
+      endpoint,
+      { institution: 'PREGR', career: 'UGRD', emplid: null },
+      {
+        headers,
+      }
+    );
+  }
 }

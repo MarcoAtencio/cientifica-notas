@@ -1,13 +1,17 @@
 <div class="box-grades">
   <div>
-    <div class="box-back" (click)="back()">
-      <mat-icon> arrow_back </mat-icon>
-      <p style="margin-left: 10px">Regresar</p>
+    <div class="header-container">
+      <div class="box-back" (click)="back()">
+        <mat-icon> arrow_back </mat-icon>
+        <p style="margin-left: 10px">Regresar</p>
+      </div>
+      <div class="final-grade">
+        <p>Ponderado Final: {{ finalAverage() }}</p>
+      </div>
     </div>
 
     <div class="header">
       <h1 class="text-center mb-4 mt-4">Notas</h1>
-      <!-- <p class="average">{{ finalAverage() }}</p> -->
     </div>
 
     <div class="row">
