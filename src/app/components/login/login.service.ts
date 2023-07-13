@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -18,6 +19,12 @@ export class LoginService {
       origen: 'W',
     });
   }
+
+  getAuthLocalStorage(): Observable<any> {
+    const endpoint = `${this.API}student/auth`;
+    return this.http.get<any>(endpoint);
+  }
+  
 
   token(email: string, password: string): Observable<any> {
     const endpoint = `${this.API}oauth/token`;

@@ -8,28 +8,18 @@
 
   <form class="row" style="width: 450px">
     <div class="form-group mb-3">
-      <label for="exampleInputEmail1">Usuario</label>
+      <label for="exampleInputEmail1">Token</label>
       <input
-        type="email"
+        type="text"
         class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
-        placeholder="Ingresa tu usuario"
-        [(ngModel)]="email"
-        name="email"
+        id="inputToken"
+        aria-describedby="token"
+        placeholder="Ingresa tu token"
+        [(ngModel)]="token"
+        name="token"
       />
     </div>
-    <div class="form-group mb-4">
-      <label for="exampleInputPassword1">Contraseña</label>
-      <input
-        type="password"
-        class="form-control"
-        id="exampleInputPassword1"
-        placeholder="Ingresa tu contraseña"
-        [(ngModel)]="password"
-        name="password"
-      />
-    </div>
+
     <div class="form-group">
       <button
         type="button"

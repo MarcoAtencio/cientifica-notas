@@ -27,7 +27,7 @@ export class GradesComponent implements OnInit {
           this.coursesLastCycle =
             res.UCS_REST_HST_CRSE_RES.UCS_REST_HST_CRSE_COM.filter(
               (course: any) =>
-                course.Des_ciclo_lectivo === 'Semest Pregrad Regular 2022-2'
+                course.Des_ciclo_lectivo === 'Semest Pregrad Regular 2023-1'
             );
           return this.gradesService.getGrades();
         })

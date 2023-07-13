@@ -11,7 +11,7 @@ export class GradesService {
   constructor(private http: HttpClient) {}
 
   getGrades() {
-    const endpoint = `${this.API}student/grades`;
+    const endpoint = `${this.API}api/client/parameters/grades`;
     const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
@@ -21,7 +21,7 @@ export class GradesService {
       {
         institution: 'PREGR',
         degree: 'UGRD',
-        strm: '2231',
+        strm: '2233',
         emplid: '-',
       },
       {
@@ -31,14 +31,14 @@ export class GradesService {
   }
 
   getCourseHistory() {
-    const endpoint = `${this.API}student/getCourseHistory`;
+    const endpoint = `${this.API}api/client/parameters/getCourseHistory`;
     const token = sessionStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
     return this.http.post<any>(
       endpoint,
-      { institution: 'PREGR', career: 'UGRD', emplid: null },
+      { emplid: null, career: 'UGRD', institution: 'PREGR' },
       {
         headers,
       }
